@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful - Supabase Auth</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #121212;
+            color: #fff;
+        }
+        .container {
+            max-width: 350px;
+            margin: auto;
+            padding: 25px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255,255,255,0.1);
+        }
+        .success-icon {
+            font-size: 64px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        .success-title {
+            font-size: 24px;
+            color: #28a745;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .success-message {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .email-info {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #2c2c2c;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+        }
+        button {
+            width: 100%;
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .secondary-button {
+            background: #6c757d !important;
+        }
+        .secondary-button:hover {
+            background: #5a6268 !important;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .help-section {
+            margin-top: 30px;
+            padding: 15px;
+            background: #2c2c2c;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #ccc;
+            text-align: left;
+        }
+        .help-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="success-title">Registration Successful!</div>
+        <div class="success-message">
+            Your account has been created successfully. Please check your email to verify your account.
+        </div>
+        
+        <div class="email-info">
+            <strong>📧 Check Your Email</strong><br>
+            We've sent a verification link to your email address. Click the link to activate your account.
+        </div>
+        
+        <button onclick="goToLogin()">Go to Login</button>
+        <button class="secondary-button" onclick="goHome()">Back to Home</button>
+        
+        <div class="help-section">
+            <div class="help-title">Didn't receive the email?</div>
+            <ul>
+                <li>Check your spam or junk folder</li>
+                <li>Make sure you entered the correct email address</li>
+                <li>Wait a few minutes and refresh your inbox</li>
+                <li>Contact support if you still don't receive it</li>
+            </ul>
+            <a href="#" onclick="resendEmail()">Resend verification email</a>
+        </div>
+    </div>
+
+    <script>
+        // Get email from URL parameter if available
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Initialize page with user's email if provided
+        function initializePage() {
+            const userEmail = getUrlParameter('email');
+            if (userEmail) {
+                const emailInfo = document.querySelector('.email-info');
+                emailInfo.innerHTML = `<strong>📧 Check Your Email</strong><br>We've sent a verification link to <strong>${userEmail}</strong>. Click the link to activate your account.`;
+            }
+        }
+
+        // Go to login page
+        function goToLogin() {
+            window.location.href = 'index.html';
+        }
+
+        // Go to home page
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Resend verification email (placeholder function)
+        function resendEmail() {
+            // In a real implementation, you would call your backend API here
+            alert('Verification email resent! Please check your inbox.');
+        }
+
+        // Initialize page when loaded
+        window.onload = initializePage;
+
+        // Auto redirect to login after 30 seconds
+        let countdown = 30;
+        function updateCountdown() {
+            countdown--;
+            if (countdown <= 0) {
+                goToLogin();
+            }
+        }
+        
+        // Optional: Show countdown timer
+        // setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
